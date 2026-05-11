@@ -3,5 +3,5 @@ services:
   web:
      image: nabeel1510/notes-app:latest
      ports:
-        8000:8000
+        - "8000:8000"
    
