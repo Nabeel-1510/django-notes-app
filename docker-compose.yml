@@ -1,7 +1,11 @@
 version: "3.8"
+
 services:
   web:
-     image: nabeel1510/notes-app:latest
-     ports:
-        - "8000:8000"
-   
+    image: nabeel1510/notes-app:latest
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ".env"
