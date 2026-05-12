@@ -1,4 +1,4 @@
-@Libraries
+@Libraries("gitShared")
 pipeline{
 
     agent { label 'vinod' }
