@@ -1,21 +1,24 @@
-@Libraries("gitShared") _
-pipeline{
+@Library("gitShared") _
+
+pipeline {
 
     agent { label 'vinod' }
 
-    stages{
-        stage("Hello"){
-            steps{
-                script{
+    stages {
+
+        stage("Hello") {
+
+            steps {
+
+                script {
                     hello()
                 }
             }
         }
-                
 
-        stage("CODE"){
+        stage("CODE") {
 
-            steps{
+            steps {
 
                 echo "Cloning code from GitHub"
 
@@ -23,9 +26,9 @@ pipeline{
             }
         }
 
-        stage("BUILD IMAGE"){
+        stage("BUILD IMAGE") {
 
-            steps{
+            steps {
 
                 echo "Building Docker image"
 
@@ -33,17 +36,19 @@ pipeline{
             }
         }
 
-        stage("PUSH IMAGE"){
+        stage("PUSH IMAGE") {
 
-            steps{
+            steps {
 
                 echo "Pushing image to Docker Hub"
 
-                withCredentials([usernamePassword(
-                    credentialsId: "dockerhubCred",
-                    usernameVariable: "dockerhubUser",
-                    passwordVariable: "dockerhubPass"
-                )]){
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: "dockerhubCred",
+                        usernameVariable: "dockerhubUser",
+                        passwordVariable: "dockerhubPass"
+                    )
+                ]) {
 
                     sh 'echo $dockerhubPass | docker login -u $dockerhubUser --password-stdin'
 
@@ -54,9 +59,9 @@ pipeline{
             }
         }
 
-        stage("DEPLOY"){
+        stage("DEPLOY") {
 
-            steps{
+            steps {
 
                 echo "Deploying application"
 
